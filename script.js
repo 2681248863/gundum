@@ -76,8 +76,15 @@ function loadGalleryImages() {
     // 图片文件列表 - 由于GitHub Pages是静态托管，这里需要手动更新
     // 当model picture文件夹中的图片变化时，请更新下面的列表
     const imageFiles = [
-        'IMG_3373.JPG',
-        'IMG_3374.JPG'
+        'IMG_3361.JPG',
+        'IMG_3363.JPG',
+        'IMG_3364.JPG',
+        'IMG_3365.JPG',
+        'IMG_3366.JPG',
+        'IMG_3367.JPG',
+        'IMG_3368.JPG',
+        'IMG_3369.JPG',
+        'IMG_3372.JPG'
     ];
 
     if (imageFiles.length === 0) {
