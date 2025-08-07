@@ -136,8 +136,21 @@
                         document.getElementById('perfect-unicorn-detail').style.display = 'block';
                     }
 
-                    // 滚动到详情区域
-                    document.getElementById('model-details').scrollIntoView({ behavior: 'smooth' });
+                    // 滚动到详情区域并居中显示
+                    requestAnimationFrame(() => {
+                        const modelDetails = document.getElementById('model-details');
+                        // 强制回流以获取最新尺寸
+                        modelDetails.offsetHeight;
+                        const rect = modelDetails.getBoundingClientRect();
+                        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+                        // 计算居中位置，添加小的调整值以补偿可能的计算误差
+                        const scrollTarget = window.pageYOffset + rect.top - (viewportHeight - rect.height) / 2 - 20;
+
+                        window.scrollTo({
+                            top: scrollTarget,
+                            behavior: 'smooth'
+                        });
+                    });
                 });
             });
         });
