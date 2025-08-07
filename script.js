@@ -180,80 +180,11 @@ document.addEventListener('DOMContentLoaded', function() {
     animateOnHover(document.querySelectorAll('.character-card'));
 });
 
-// 图片上传功能
-function setupUploadFunctionality() {
-    const uploadForm = document.getElementById('upload-form');
-    const uploadStatus = document.getElementById('upload-status');
-    const modelImage = document.getElementById('model-image');
-    const galleryGrid = document.querySelector('.gallery-grid');
 
-    if (!uploadForm || !uploadStatus) return;
-
-    // 表单提交处理
-    uploadForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const modelName = document.getElementById('model-name').value;
-        const modelDescription = document.getElementById('model-description').value;
-        const imageFile = modelImage.files[0];
-
-        if (!modelName || !imageFile) {
-            showUploadStatus('请填写模型名称并选择图片', 'error');
-            return;
-        }
-
-        // 模拟上传过程
-        showUploadStatus('上传中...', 'success');
-
-        // 由于GitHub Pages是静态服务，这里只做前端预览
-        setTimeout(() => {
-            // 读取图片文件并显示预览
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const imgUrl = e.target.result;
-
-                // 添加到画廊
-                if (galleryGrid) {
-                    const newImg = document.createElement('img');
-                    newImg.src = imgUrl;
-                    newImg.alt = modelName;
-                    newImg.addEventListener('click', function() {
-                        openLightbox(this.src);
-                    });
-                    galleryGrid.appendChild(newImg);
-                }
-
-                showUploadStatus('上传成功！图片已添加到画廊', 'success');
-                uploadForm.reset();
-            };
-            reader.readAsDataURL(imageFile);
-        }, 1500);
-    });
-
-    // 显示上传状态
-    function showUploadStatus(message, type) {
-        uploadStatus.textContent = message;
-        uploadStatus.className = 'upload-status ' + type;
-    }
-
-    // 复用图片画廊的放大功能
-    function openLightbox(imgSrc) {
-        const lightbox = document.getElementById('lightbox');
-        if (lightbox) {
-            lightbox.classList.add('active');
-            const imgBig = document.createElement('img');
-            imgBig.src = imgSrc;
-            while (lightbox.firstChild) {
-                lightbox.removeChild(lightbox.firstChild);
-            }
-            lightbox.appendChild(imgBig);
-        }
-    }
-}
 
 // 滚动动画
 function revealOnScroll() {
-    const reveals = document.querySelectorAll('.series-section, .mobile-suits-section, .characters-section, .gallery-section, .upload-section');
+    const reveals = document.querySelectorAll('.series-section, .mobile-suits-section, .characters-section, .gallery-section');
 
     for (let i = 0; i < reveals.length; i++) {
         const windowHeight = window.innerHeight;
@@ -270,6 +201,4 @@ function revealOnScroll() {
 
 window.addEventListener('scroll', revealOnScroll);
 
-// 初始化上传功能
-setupUploadFunctionality();
 revealOnScroll(); // 初始检查
