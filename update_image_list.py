@@ -34,4 +34,17 @@ def update_image_list():
     pattern = r'(const imageFiles = \[)([\s\S]*?)(\];)'
     
     # 构建新的数组内容
-    new_array_content = '\n        ' + ',\n        '.join([f
+    new_array_content = '\n        ' + ',\n        '.join([f"'{file}'" for file in image_files]) + '\n    '
+    
+    # 替换旧的数组内容
+    updated_content = re.sub(pattern, r'\g<1>{}\g<3>'.format(new_array_content), script_content)
+    
+    # 4. 写回script.js文件
+    with open(SCRIPT_FILE, 'w', encoding='utf-8') as f:
+        f.write(updated_content)
+    
+    print(f"成功更新 {SCRIPT_FILE} 中的图片列表")
+
+
+if __name__ == '__main__':
+    update_image_list()
