@@ -50,13 +50,13 @@ gundum/
 1. **更改内容** - 编辑`index.html`文件修改网站内容
 2. **更改样式** - 编辑`styles.css`文件修改网站样式
 3. **更改交互** - 编辑`script.js`文件修改网站交互行为
-4. **替换图片** - 将图片文件添加到`model picture`文件夹，并在`index.html`中更新图片路径
+4. **替换图片** - 将图片文件添加到`model picture`文件夹，并在`script.js`文件中更新`imageFiles`数组中的图片文件名列表
 
 ## 注意事项
 
 - 本网站使用了外部资源（Google字体和Font Awesome图标），需要联网才能正常显示
-- 图片占位符使用了`via.placeholder.com`，实际使用时应替换为真实的高达图片
 - 本项目仅用于学习和交流，不用于商业用途
+- **GitHub Pages部署注意事项**：由于GitHub Pages是静态托管服务，无法运行后端服务器脚本，因此图片列表需要在`script.js`文件中手动更新。当`model picture`文件夹中的图片数量或文件名发生变化时，请手动更新`script.js`文件中的`imageFiles`数组。
 
 希望你喜欢这个高达模型展示网站！如果你有任何问题或建议，请随时联系我。
 

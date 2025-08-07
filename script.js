@@ -60,13 +60,39 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // 图片画廊点击放大效果
-    const galleryImages = document.querySelectorAll('.gallery-grid img');
-    const lightbox = document.createElement('div');
+    // 加载画廊图片 (适用于GitHub Pages静态部署)
+function loadGalleryImages() {
+    const galleryGrid = document.querySelector('.gallery-grid');
+    if (!galleryGrid) return;
+
+    // 清空现有画廊内容
+    galleryGrid.innerHTML = '';
+
+    // 创建lightbox元素
+    const lightbox = document.getElementById('lightbox') || document.createElement('div');
     lightbox.id = 'lightbox';
     document.body.appendChild(lightbox);
 
-    galleryImages.forEach(img => {
+    // 图片文件列表 - 由于GitHub Pages是静态托管，这里需要手动更新
+    // 当model picture文件夹中的图片变化时，请更新下面的列表
+    const imageFiles = [
+        'IMG_3373.JPG',
+        'IMG_3374.JPG'
+    ];
+
+    if (imageFiles.length === 0) {
+        galleryGrid.innerHTML = '<p class="no-images">没有找到图片</p>';
+        return;
+    }
+
+    // 为每个图片创建元素并添加到画廊
+    imageFiles.forEach((fileName, index) => {
+        const img = document.createElement('img');
+        img.src = `model picture/${fileName}`;
+        img.alt = `高达模型图片${index + 1}`;
+        img.loading = 'lazy'; // 延迟加载
+
+        // 添加点击放大事件
         img.addEventListener('click', function() {
             lightbox.classList.add('active');
             const imgBig = document.createElement('img');
@@ -76,13 +102,20 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             lightbox.appendChild(imgBig);
         });
+
+        galleryGrid.appendChild(img);
     });
 
+    // 点击lightbox关闭
     lightbox.addEventListener('click', function() {
         if (this.classList.contains('active')) {
             this.classList.remove('active');
         }
     });
+}
+
+// 页面加载完成后加载画廊图片
+window.addEventListener('load', loadGalleryImages);
 
     // 页面加载动画
     const loader = document.createElement('div');
