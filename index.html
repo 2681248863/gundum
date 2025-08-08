@@ -11,6 +11,8 @@
 <body>
     <!-- 进场动画 -->
     <div id="intro-animation" class="intro-animation">
+        <div class="energy-beam"></div>
+        <div class="energy-beam"></div>
         <div class="intro-text">
             <p class="intro-line">在遥远的宇宙中...</p>
             <p class="intro-line">人类的命运与钢铁的巨人交织在一起</p>
@@ -43,6 +45,11 @@
 
     <!-- 英雄区域 -->
     <section id="home" class="hero">
+        <div class="hero-decoration">
+            <div class="gundam-part part1"></div>
+            <div class="gundam-part part2"></div>
+            <div class="gundam-part part3"></div>
+        </div>
         <div class="hero-content">
             <h1>刹那的高达模型收藏</h1>
             <p>高达（GUNDAM）是日本著名的机器人动画系列，自1979年首次播出以来，凭借深刻的剧情、复杂的人物关系和独特的机械设计，成为了全球范围内最具影响力的动画IP之一。高达模型（GUNPLA）则是该系列衍生的拼装模型产品，让粉丝能够亲手构建自己喜爱的机动战士。</p>
@@ -250,21 +257,25 @@
 
             console.log('动画区域样式设置完成');
 
-            // 自动隐藏动画 - 时间设置为4秒
+            // 自动隐藏动画 - 时间设置为20秒
+            console.log('[' + new Date().toLocaleTimeString() + '] 自动隐藏动画时间设置为20秒');
             const autoHideTimer = setTimeout(function() {
-                console.log('自动隐藏触发');
+                console.log('[' + new Date().toLocaleTimeString() + '] 20秒后自动隐藏触发');
                 hideAnimation();
-            }, 4000); // 4秒后隐藏动画
+            }, 5000); // 20秒后隐藏动画
 
-            // 隐藏动画函数
+            // 隐藏动画函数 - 添加平滑过渡效果
             function hideAnimation() {
                 console.log('隐藏动画函数执行');
+                // 设置过渡效果
+                introAnimation.style.transition = 'opacity 1.5s ease, transform 1.5s ease';
                 introAnimation.style.opacity = '0';
+                introAnimation.style.transform = 'scale(0.95)';
                 introAnimation.style.pointerEvents = 'none';
                 // 使用setTimeout确保过渡效果完成后再隐藏
                 setTimeout(function() {
                     introAnimation.style.display = 'none';
-                }, 500);
+                }, 1500);
                 // 移除所有事件监听器
                 document.removeEventListener('click', handleDocumentClick);
                 document.removeEventListener('keydown', handleKeyDown);
@@ -294,21 +305,7 @@
             document.addEventListener('keydown', handleKeyDown);
             console.log('键盘Esc键事件绑定完成');
 
-            // 测试点击功能
-            setTimeout(function() {
-                console.log('3秒后测试点击功能');
-                console.log('当前introAnimation元素:', introAnimation);
-                console.log('当前pointerEvents:', introAnimation.style.pointerEvents);
-                console.log('当前z-index:', introAnimation.style.zIndex);
-                // 模拟点击测试
-                console.log('模拟点击测试...');
-                const clickEvent = new MouseEvent('click', {
-                    bubbles: true,
-                    cancelable: true,
-                    view: window
-                });
-                introAnimation.dispatchEvent(clickEvent);
-            }, 3000);
+            
         });
     </script>
 </body>

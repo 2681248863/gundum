@@ -32,7 +32,7 @@ body {
     padding: 0 20px;
 }
 
-/* 导航栏样式 */
+/* 导航栏样式 - 高达风格 */
 header {
     background-color: var(--gundam-dark-gray);
     color: var(--gundam-white);
@@ -42,6 +42,21 @@ header {
     top: 0;
     z-index: 1000;
     border-bottom: 3px solid var(--gundam-red);
+    box-shadow: 0 4px 12px rgba(255, 62, 0, 0.3);
+}
+
+/* 高达标志发光效果 */
+.gundam-logo {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(255, 62, 0, 0.7);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(255, 62, 0, 1);
+    }
 }
 
 /* 高达标志样式 */
@@ -142,7 +157,7 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+    background: linear-gradient(to bottom, #0a0e25 0%, #1a203d 50%, #0a0e25 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -155,43 +170,69 @@ header {
     pointer-events: auto;
 }
 
-/* 背景动画元素 */
+/* 星星背景效果 */
 .intro-animation::before {
     content: '';
     position: absolute;
-    width: 200%;
-    height: 200%;
-    top: -50%;
-    left: -50%;
-    background: repeating-linear-gradient(
-        45deg,
-        rgba(255, 62, 0, 0.1),
-        rgba(255, 62, 0, 0.1) 15px,
-        rgba(0, 102, 204, 0.1) 15px,
-        rgba(0, 102, 204, 0.1) 30px
-    );
-    animation: rotate 15s linear infinite;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.8) 1px, transparent 1px),
+        radial-gradient(rgba(255, 255, 255, 0.5) 1px, transparent 1px);
+    background-size: 50px 50px, 30px 30px;
+    background-position: 0 0, 25px 25px;
+    animation: twinkle 8s ease-in-out infinite;
     z-index: 0;
 }
 
-/* 高达头部轮廓装饰 */
+/* 宇宙飞船/高达元素轮廓 */
 .intro-animation::after {
     content: '';
     position: absolute;
-    bottom: -10%;
-    right: -10%;
-    width: 40%;
-    height: 40%;
-    background-color: rgba(255, 62, 0, 0.05);
-    clip-path: polygon(
-        50% 0%,
-        100% 38%,
-        82% 100%,
-        18% 100%,
-        0% 38%
-    );
-    animation: rotate 30s linear infinite reverse;
+    top: 50%;
+    left: 50%;
+    width: 60%;
+    height: 60%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(0, 102, 204, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
     z-index: 0;
+}
+
+/* 能量光效 */
+.intro-animation .energy-beam {
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 102, 204, 0) 0%, rgba(0, 102, 204, 0.5) 50%, rgba(0, 102, 204, 0) 100%);
+    top: 0;
+    left: 30%;
+    transform-origin: top;
+    animation: sweep 10s linear infinite;
+    z-index: 0;
+}
+
+.intro-animation .energy-beam:nth-child(2) {
+    left: 70%;
+    animation: sweep 12s linear infinite 1s;
+}
+
+/* 动画关键帧 */
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes sweep {
+    0% {
+        transform: rotate(-45deg);
+    }
+    100% {
+        transform: rotate(45deg);
+    }
 }
 
 .intro-text {
@@ -286,8 +327,109 @@ header {
 }
 
 .hero-content {
+    max-width: 800px;
+    padding: 2rem;
+    opacity: 0;
+    animation: fadeIn 1.5s ease forwards 0.5s;
     position: relative;
     z-index: 1;
+}
+
+/* 英雄区域高达元素装饰 */
+.hero-decoration {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hero-decoration .gundam-part {
+    position: absolute;
+    background-color: rgba(255, 62, 0, 0.05);
+    animation: float 20s ease-in-out infinite;
+}
+
+.hero-decoration .part1 {
+    width: 150px;
+    height: 150px;
+    top: 10%;
+    left: 5%;
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+    animation-delay: 0s;
+}
+
+.hero-decoration .part2 {
+    width: 100px;
+    height: 100px;
+    bottom: 15%;
+    right: 10%;
+    border-radius: 50%;
+    animation-delay: 5s;
+}
+
+.hero-decoration .part3 {
+    width: 120px;
+    height: 120px;
+    top: 40%;
+    right: 15%;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    animation-delay: 10s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(20px, -20px) rotate(5deg);
+    }
+    50% {
+        transform: translate(0, 20px) rotate(0deg);
+    }
+    75% {
+        transform: translate(-20px, -10px) rotate(-5deg);
+    }
+}
+
+/* 高达风格按钮 */
+.btn {
+    display: inline-block;
+    background-color: var(--gundam-red);
+    color: var(--gundam-white);
+    padding: 12px 30px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.5s ease;
+}
+
+.btn:hover {
+    background-color: var(--gundam-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover::before {
+    left: 100%;
 }
 
 .hero-content h1 {
@@ -397,7 +539,8 @@ header {
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    border: 2px solid var(--gundam-gray);
     position: relative;
     overflow: hidden;
 }
@@ -408,13 +551,14 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    height: 5px;
+    height: 4px;
     background: linear-gradient(90deg, var(--gundam-red), var(--gundam-blue));
 }
 
 .series-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    border-color: var(--gundam-red);
 }
 
 .series-card img {
@@ -752,23 +896,53 @@ header {
     transform: rotate(-15deg);
 }
 
-/* 页脚样式 */
+/* 页脚样式 - 高达风格 */
 footer {
     background-color: var(--gundam-dark-gray);
     color: var(--gundam-white);
     padding: 3rem 0;
     position: relative;
     overflow: hidden;
+    border-top: 3px solid var(--gundam-red);
+    margin-top: 3rem;
 }
 
+/* 页脚背景装饰 */
 footer::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 10px;
-    background: linear-gradient(90deg, var(--gundam-red), var(--gundam-green), var(--gundam-blue), var(--gundam-yellow));
+    height: 100%;
+    background-image: radial-gradient(rgba(255, 62, 0, 0.1) 1px, transparent 1px);
+    background-size: 30px 30px;
+    z-index: 0;
+    opacity: 0.3;
+}
+
+/* 高达轮廓装饰 */
+footer::after {
+    content: '';
+    position: absolute;
+    bottom: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255, 62, 0, 0.05);
+    clip-path: polygon(
+        50% 0%,
+        100% 38%,
+        82% 100%,
+        18% 100%,
+        0% 38%
+    );
+    z-index: 0;
+}
+
+.footer-content {
+    position: relative;
+    z-index: 1;
 }
 
 /* 高达轮廓装饰 */
