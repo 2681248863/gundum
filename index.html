@@ -9,6 +9,16 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- 进场动画 -->
+    <div id="intro-animation" class="intro-animation">
+        <div class="intro-text">
+            <p class="intro-line">在遥远的宇宙中...</p>
+            <p class="intro-line">人类的命运与钢铁的巨人交织在一起</p>
+            <p class="intro-line">那些被称为高达的机动战士</p>
+            <p class="intro-line">承载着希望、梦想与战争的记忆</p>
+            <p class="intro-line">此刻，它们将在这个空间展现辉煌！</p>
+        </div>
+    </div>
     <!-- 导航栏 -->
     <header>
         <div class="gundam-logo"></div>
@@ -148,7 +158,7 @@
                     });
                 });
             });
-        });
+        ;
     </script>
 
     
@@ -214,5 +224,92 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        // 控制进场动画
+        window.addEventListener('load', function() {
+            console.log('页面完全加载完成，开始初始化动画');
+            const introAnimation = document.getElementById('intro-animation');
+
+            if (!introAnimation) {
+                console.error('未找到intro-animation元素');
+                return;
+            }
+
+            // 确保动画区域在最顶层且可点击
+            introAnimation.style.zIndex = '9999';
+            introAnimation.style.pointerEvents = 'auto';
+            introAnimation.style.position = 'fixed';
+            introAnimation.style.top = '0';
+            introAnimation.style.left = '0';
+            introAnimation.style.width = '100%';
+            introAnimation.style.height = '100%';
+            introAnimation.style.display = 'flex';
+            introAnimation.style.justifyContent = 'center';
+            introAnimation.style.alignItems = 'center';
+            introAnimation.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+
+            console.log('动画区域样式设置完成');
+
+            // 自动隐藏动画 - 时间设置为4秒
+            const autoHideTimer = setTimeout(function() {
+                console.log('自动隐藏触发');
+                hideAnimation();
+            }, 4000); // 4秒后隐藏动画
+
+            // 隐藏动画函数
+            function hideAnimation() {
+                console.log('隐藏动画函数执行');
+                introAnimation.style.opacity = '0';
+                introAnimation.style.pointerEvents = 'none';
+                // 使用setTimeout确保过渡效果完成后再隐藏
+                setTimeout(function() {
+                    introAnimation.style.display = 'none';
+                }, 500);
+                // 移除所有事件监听器
+                document.removeEventListener('click', handleDocumentClick);
+                document.removeEventListener('keydown', handleKeyDown);
+            }
+
+            // 点击处理函数 - 绑定到document
+            function handleDocumentClick() {
+                console.log('页面点击事件触发');
+                clearTimeout(autoHideTimer);
+                hideAnimation();
+            }
+
+            // 键盘事件处理函数
+            function handleKeyDown(e) {
+                if (e.key === 'Escape') {
+                    console.log('Esc键按下，跳过动画');
+                    clearTimeout(autoHideTimer);
+                    hideAnimation();
+                }
+            }
+
+            // 绑定点击事件到整个文档
+            document.addEventListener('click', handleDocumentClick);
+            console.log('文档点击事件绑定完成');
+
+            // 额外添加键盘Esc键跳过功能
+            document.addEventListener('keydown', handleKeyDown);
+            console.log('键盘Esc键事件绑定完成');
+
+            // 测试点击功能
+            setTimeout(function() {
+                console.log('3秒后测试点击功能');
+                console.log('当前introAnimation元素:', introAnimation);
+                console.log('当前pointerEvents:', introAnimation.style.pointerEvents);
+                console.log('当前z-index:', introAnimation.style.zIndex);
+                // 模拟点击测试
+                console.log('模拟点击测试...');
+                const clickEvent = new MouseEvent('click', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });
+                introAnimation.dispatchEvent(clickEvent);
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
