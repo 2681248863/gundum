@@ -1,5 +1,44 @@
 // 等待DOM加载完成
 document.addEventListener('DOMContentLoaded', function() {
+    // 初始化高达背景动画
+    initGundamBackground();
+
+    // 创建多个能量光束
+    function initGundamBackground() {
+        const background = document.querySelector('.gundam-background');
+        if (!background) return;
+
+        // 创建高达轮廓
+        const silhouette = document.createElement('div');
+        silhouette.classList.add('gundam-silhouette');
+        background.appendChild(silhouette);
+
+        // 创建多个能量光束
+        const beamCount = 8; // 光束数量
+        for (let i = 0; i < beamCount; i++) {
+            setTimeout(() => {
+                const beam = document.createElement('div');
+                beam.classList.add('energy-beam');
+                
+                // 随机位置
+                const leftPos = Math.random() * 100;
+                beam.style.left = `${leftPos}%`;
+                
+                // 随机动画延迟和持续时间
+                const delay = Math.random() * 5;
+                const duration = 8 + Math.random() * 7;
+                beam.style.animationDelay = `${delay}s`;
+                beam.style.animationDuration = `${duration}s`;
+                
+                // 随机颜色
+                const colors = ['var(--gundam-blue)', 'var(--gundam-red)', 'var(--gundam-yellow)'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                beam.style.background = `linear-gradient(to bottom, transparent 0%, ${randomColor} 50%, transparent 100%)`;
+                
+                background.appendChild(beam);
+            }, i * 500); // 错开创建时间
+        }
+    }
     // 移动端导航栏切换
     const burger = document.querySelector('.burger');
     const nav = document.querySelector('.nav-links');
