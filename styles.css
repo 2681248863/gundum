@@ -80,6 +80,20 @@ header {
     z-index: 1001;
 }
 
+/* 移动端适配 - 避免logo挡住标题 */
+@media screen and (max-width: 768px) {
+    .gundam-logo {
+        width: 40px;
+        height: 40px;
+        top: 15px;
+        left: 15px;
+    }
+    .logo h1 {
+        font-size: 1.4rem;
+        margin-left: 60px;
+    }
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
