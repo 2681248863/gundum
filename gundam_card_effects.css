@@ -219,3 +219,148 @@
 .series-card:hover .energy-charge {
     height: 100%;
 }
+
+/* h2标题样式 - 提高对比度 */
+h2 {
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+}
+
+/* 高达编年史样式 */
+.chronicle-section {
+    background-color: rgba(10, 10, 20, 0.8);
+    padding: 60px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--gundam-armor-red), var(--gundam-armor-blue));
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.timeline-item:nth-child(odd) {
+    left: 0;
+}
+
+.timeline-item:nth-child(even) {
+    left: 50%;
+}
+
+.timeline-year {
+    position: absolute;
+    top: 20px;
+    right: -100px;
+    width: 180px;
+    text-align: center;
+    background-color: var(--gundam-armor-red);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 62, 0, 0.7);
+    z-index: 10; /* 确保年份标签显示在最前面 */
+}
+
+.timeline-item:nth-child(even) .timeline-year {
+    left: -100px;
+    right: auto;
+    background-color: var(--gundam-armor-blue);
+    box-shadow: 0 0 10px rgba(0, 102, 204, 0.7);
+}
+
+.timeline-content {
+    padding: 20px;
+    background-color: rgba(25, 25, 40, 0.7);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    border-color: var(--gundam-armor-yellow);
+}
+
+.timeline-content h3 {
+    color: var(--gundam-armor-yellow);
+    margin-top: 0;
+    border-bottom: 1px solid rgba(255, 204, 0, 0.3);
+    padding-bottom: 10px;
+}
+
+.timeline-content p {
+    color: #ddd;
+}
+
+/* 时间线节点样式 */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    top: 25px;
+    right: -10px;
+    z-index: 1;
+    box-shadow: 0 0 10px 2px var(--gundam-armor-red);
+}
+
+.timeline-item:nth-child(even)::after {
+    left: -10px;
+    right: auto;
+    box-shadow: 0 0 10px 2px var(--gundam-armor-blue);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 31px;
+    }
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+    .timeline-item:nth-child(even) {
+        left: 0;
+    }
+    .timeline-year {
+        right: auto;
+        left: -100px;
+    }
+    .timeline-item:nth-child(even) .timeline-year {
+        left: -100px;
+    }
+    .timeline-item::after {
+        left: 21px;
+        right: auto;
+    }
+    .timeline-item:nth-child(even)::after {
+        left: 21px;
+    }
+}
