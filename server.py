@@ -16,7 +16,7 @@ import sys
 import json
 
 # 定义服务器端口
-PORT = 8080
+PORT = 8001
 
 # 获取当前脚本所在目录
 script_dir = os.path.dirname(os.path.abspath(__file__))
