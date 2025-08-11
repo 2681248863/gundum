@@ -1231,7 +1231,8 @@ window.addEventListener('scroll', function() {
 }
 
 .gallery-grid img {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: auto;
     max-height: 300px;
     object-fit: contain;
@@ -1505,10 +1506,22 @@ footer::after {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 50%;
+        width: 70%;
         transform: translateX(100%);
         transition: transform 0.5s ease-in;
         z-index: 999;
+    }
+
+    /* 优化移动端触摸交互 */
+    .series-card, .mobile-suit-card, .character-card, .gallery-item {
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+
+    /* 增加触摸反馈 */
+    .series-card:active, .mobile-suit-card:active, .character-card:active, .gallery-item:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
     }
 
     .nav-links li {
@@ -1565,30 +1578,42 @@ footer::after {
 
 @media screen and (max-width: 480px) {
     .detail-content h3 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
 
     .detail-text p {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
 
     .hero-content h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .hero-content p {
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
 
     .btn {
-        padding: 0.8rem 1.5rem;
-        font-size: 1rem;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
     }
 
-    .series-section h2,
-    .mobile-suits-section h2,
-    .characters-section h2,
-    .gallery-section h2 {
-        font-size: 2rem;
+    .series-section h2, .mobile-suits-section h2, .characters-section h2, .gallery-section h2 {
+        font-size: 1.8rem;
     }
+
+    /* 优化页脚在极小屏幕上的显示 */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .footer-section h3 {
+        font-size: 1.3rem;
+    }
+
+    .footer-section p, .footer-section ul li {
+        font-size: 0.9rem;
+    }
+
     max-width: 800px;
