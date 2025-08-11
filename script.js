@@ -112,18 +112,14 @@ function loadGalleryImages() {
     lightbox.id = 'lightbox';
     document.body.appendChild(lightbox);
 
-    // 图片文件列表 - 由于GitHub Pages是静态托管，这里需要手动更新
-    // 当model picture文件夹中的图片变化时，请更新下面的列表
+    // 图片文件列表 - 包含标题和描述
     const imageFiles = [
-        'IMG_3361.JPG',
-        'IMG_3363.JPG',
-        'IMG_3364.JPG',
-        'IMG_3365.JPG',
-        'IMG_3366.JPG',
-        'IMG_3367.JPG',
-        'IMG_3368.JPG',
-        'IMG_3369.JPG',
-        'IMG_3372.JPG'
+        { name: 'IMG_3361.JPG', title: '自由高达', description: '眼部与光束剑细节展示' },
+        { name: 'IMG_3363.JPG', title: '强袭自由高达', description: '背部推进器特写' },
+        { name: 'IMG_3364.JPG', title: '独角兽高达', description: '毁灭模式启动' },
+        { name: 'IMG_3367.JPG', title: '新安洲', description: '红色彗星的魅力' },
+        { name: 'IMG_3368.JPG', title: '能天使高达', description: 'GN剑装备展示' },
+        { name: 'IMG_3369.JPG', title: '00高达', description: '双太阳炉系统启动' }
     ];
 
     if (imageFiles.length === 0) {
@@ -131,33 +127,166 @@ function loadGalleryImages() {
         return;
     }
 
-    // 为每个图片创建元素并添加到画廊
-    imageFiles.forEach((fileName, index) => {
-        const img = document.createElement('img');
-        img.src = `model picture/${fileName}`;
-        img.alt = `高达模型图片${index + 1}`;
-        img.loading = 'lazy'; // 延迟加载
+    // 图片加载完成计数器
+    let loadedCount = 0;
 
-        // 添加点击放大事件
-        img.addEventListener('click', function() {
+    // 为每个图片创建元素并添加到画廊
+    imageFiles.forEach((image, index) => {
+        // 创建画廊项容器
+        const galleryItem = document.createElement('div');
+        galleryItem.className = 'gallery-item';
+
+        // 创建内部容器
+        const galleryItemInner = document.createElement('div');
+        galleryItemInner.className = 'gallery-item-inner';
+
+        // 创建加载动画容器
+        const imgLoader = document.createElement('div');
+        imgLoader.className = 'img-loader';
+        imgLoader.innerHTML = '<div class="loader-spinner"></div>';
+
+        // 创建图片元素
+        const img = document.createElement('img');
+        img.src = `model picture/${image.name}`;
+        img.alt = image.title;
+        img.loading = 'lazy'; // 延迟加载
+        img.style.width = '100%';
+        img.style.height = '250px';
+        img.style.objectFit = 'cover';
+        img.style.borderRadius = '4px 4px 0 0';
+
+        // 创建图片标题和描述
+        const caption = document.createElement('div');
+        caption.className = 'gallery-caption';
+        caption.innerHTML = `
+            <h3 style="color: var(--gundam-yellow); margin: 0.5rem 1rem; text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);">${image.title}</h3>
+            <p style="color: var(--gundam-gray); margin: 0 1rem 1rem; font-size: 0.9rem;">${image.description}</p>
+        `;
+
+        // 图片加载完成事件
+        img.addEventListener('load', function() {
+            // 移除加载动画
+            imgLoader.remove();
+            loadedCount++;
+
+            // 当所有图片加载完成后，触发入场动画
+            if (loadedCount === imageFiles.length) {
+                triggerGalleryAnimation();
+            }
+        });
+
+        // 图片加载失败事件
+        img.addEventListener('error', function() {
+            imgLoader.innerHTML = '<p style="color: var(--gundam-red);">图片加载失败</p>';
+            loadedCount++;
+
+            if (loadedCount === imageFiles.length) {
+                triggerGalleryAnimation();
+            }
+        });
+
+        // 添加点击放大事件 - 整个卡片可点击
+        galleryItem.addEventListener('click', function() {
             lightbox.classList.add('active');
             const imgBig = document.createElement('img');
-            imgBig.src = this.src;
+            imgBig.src = img.src;
+            imgBig.alt = img.alt;
+            imgBig.className = 'lightbox-image';
             while (lightbox.firstChild) {
                 lightbox.removeChild(lightbox.firstChild);
             }
+            
+            // 添加关闭按钮
+            const closeBtn = document.createElement('div');
+            closeBtn.id = 'lightbox-close';
+            closeBtn.textContent = '×';
+            closeBtn.addEventListener('click', function() {
+                lightbox.classList.remove('active');
+            });
+            
+            // 添加图片标题到lightbox
+            const caption = document.createElement('div');
+            caption.className = 'lightbox-caption';
+            caption.textContent = image.title;
+            
+            lightbox.appendChild(closeBtn);
             lightbox.appendChild(imgBig);
+            lightbox.appendChild(caption);
         });
 
-        galleryGrid.appendChild(img);
+        // 为图片添加指针样式，提示可点击
+        img.style.cursor = 'pointer';
+        galleryItem.style.cursor = 'pointer';
+
+        // 组装元素
+        galleryItemInner.appendChild(imgLoader);
+        galleryItemInner.appendChild(img);
+        galleryItemInner.appendChild(caption);
+        galleryItem.appendChild(galleryItemInner);
+        galleryGrid.appendChild(galleryItem);
     });
 
-    // 点击lightbox关闭
-    lightbox.addEventListener('click', function() {
-        if (this.classList.contains('active')) {
-            this.classList.remove('active');
+    // 画廊项入场动画函数
+    function triggerGalleryAnimation() {
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        galleryItems.forEach((item, index) => {
+            // 为每个项添加不同的延迟，创建错开的动画效果
+            setTimeout(() => {
+                item.classList.add('visible');
+            }, index * 150);
+        });
+    }
+
+    // ESC键关闭lightbox
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            lightbox.classList.remove('active');
         }
     });
+
+    // 点击lightbox空白处关闭
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+        }
+    });
+
+    // 初始化lightbox样式
+    lightbox.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    `;
+
+    // 激活lightbox的样式
+    const style = document.createElement('style');
+    style.textContent = `
+        #lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        #lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 3px solid var(--gundam-blue);
+            box-shadow: 0 0 20px rgba(0, 102, 204, 0.5);
+        }
+        .gallery-caption {
+            padding: 10px;
+            background-color: #fff;
+        }
+    `;
+    document.head.appendChild(style);
 }
 
 // 页面加载完成后加载画廊图片
