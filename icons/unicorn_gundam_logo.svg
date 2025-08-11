@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <!-- 透明背景 -->
+  <rect width="100" height="100" fill="none"/>
+  
+  <!-- 主体轮廓 -->
+  <path d="M50 10 L90 50 L50 90 L10 50 Z" fill="none" stroke="#00bfff" stroke-width="2"/>
+  
+  <!-- 内部科技线条 -->
+  <path d="M50 15 L85 50 L50 85 L15 50 Z" fill="none" stroke="#00bfff" stroke-width="1"/>
+  <path d="M50 20 L80 50 L50 80 L20 50 Z" fill="none" stroke="#00bfff" stroke-width="1"/>
+  
+  <!-- 独角兽角 -->
+  <path d="M50 10 L45 30 L55 30 Z" fill="#00bfff"/>
+  
+  <!-- 头部细节 -->
+  <circle cx="50" cy="30" r="8" fill="none" stroke="#00bfff" stroke-width="1.5"/>
+  <path d="M45 30 L55 30" stroke="#00bfff" stroke-width="1.5"/>
+  <path d="M50 25 L50 35" stroke="#00bfff" stroke-width="1.5"/>
+  
+  <!-- 科技网格线 -->
+  <path d="M30 30 L70 30" stroke="#00bfff" stroke-width="1" stroke-dasharray="2,2"/>
+  <path d="M30 50 L70 50" stroke="#00bfff" stroke-width="1" stroke-dasharray="2,2"/>
+  <path d="M30 70 L70 70" stroke="#00bfff" stroke-width="1" stroke-dasharray="2,2"/>
+  <path d="M30 30 L30 70" stroke="#00bfff" stroke-width="1" stroke-dasharray="2,2"/>
+  <path d="M50 30 L50 70" stroke="#00bfff" stroke-width="1" stroke-dasharray="2,2"/>
+  <path d="M70 30 L70 70" stroke="#00bfff" stroke-width="1" stroke-dasharray="2,2"/>
+</svg>

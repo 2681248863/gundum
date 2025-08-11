@@ -1,0 +1,221 @@
+/* 高达模型卡片特效 - 装甲线条与变身效果 */
+
+/* 自定义变量 */
+:root {
+    --gundam-armor-red: #ff3e00;
+    --gundam-armor-blue: #0066cc;
+    --gundam-armor-green: #00cc66;
+    --gundam-armor-yellow: #ffcc00;
+    --glow-intensity: 0.7;
+    --transition-speed: 0.4s;
+}
+
+/* 高达装甲线条边框 */
+.series-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    transition: all var(--transition-speed) ease;
+}
+
+/* 装甲线条装饰 */
+.series-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gundam-armor-red), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-speed) ease;
+}
+
+.series-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gundam-armor-blue), transparent);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition-speed) ease;
+}
+
+.series-card .armor-line-top-left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 30%;
+    background: linear-gradient(to bottom, var(--gundam-armor-red), transparent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--transition-speed) ease 0.1s;
+}
+
+.series-card .armor-line-top-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 3px;
+    height: 30%;
+    background: linear-gradient(to bottom, var(--gundam-armor-red), transparent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform var(--transition-speed) ease 0.1s;
+}
+
+.series-card .armor-line-bottom-left {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 3px;
+    height: 30%;
+    background: linear-gradient(to top, var(--gundam-armor-blue), transparent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform var(--transition-speed) ease 0.1s;
+}
+
+.series-card .armor-line-bottom-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 3px;
+    height: 30%;
+    background: linear-gradient(to top, var(--gundam-armor-blue), transparent);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform var(--transition-speed) ease 0.1s;
+}
+
+/* 对角线装饰 - 模仿高达装甲接缝 */
+.series-card .diagonal-line {
+    position: absolute;
+    width: 150%;
+    height: 2px;
+    background: linear-gradient(135deg, transparent, var(--gundam-armor-green), transparent);
+    top: 50%;
+    left: -25%;
+    transform: translateY(-50%) rotate(-45deg) scaleX(0);
+    transform-origin: left;
+    transition: transform var(--transition-speed) ease 0.2s;
+}
+
+/* 鼠标悬停效果 - 激活装甲线条 */
+.series-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+.series-card:hover::before,
+.series-card:hover::after {
+    transform: scaleX(1);
+}
+
+.series-card:hover .armor-line-top-left,
+.series-card:hover .armor-line-top-right,
+.series-card:hover .armor-line-bottom-left,
+.series-card:hover .armor-line-bottom-right,
+.series-card:hover .diagonal-line {
+    transform: scaleY(1);
+}
+
+.series-card:hover .diagonal-line {
+    transform: translateY(-50%) rotate(-45deg) scaleX(1);
+}
+
+/* 卡片图片激活效果 */
+.series-card img {
+    transition: all var(--transition-speed) ease;
+    filter: brightness(0.8) contrast(1);
+}
+
+.series-card:hover img {
+    transform: scale(1.05);
+    filter: brightness(1) contrast(1.2);
+}
+
+/* 卡片标题激活效果 */
+.series-card h3 {
+    transition: all var(--transition-speed) ease;
+    position: relative;
+    display: inline-block;
+}
+
+.series-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gundam-armor-red), var(--gundam-armor-blue));
+    transition: width var(--transition-speed) ease;
+}
+
+.series-card:hover h3 {
+    color: var(--gundam-armor-red);
+    text-shadow: 0 0 10px rgba(255, 62, 0, var(--glow-intensity));
+}
+
+.series-card:hover h3::after {
+    width: 100%;
+}
+
+/* 发光粒子效果 - 模拟能量激活 */
+.series-card .particle {
+    position: absolute;
+    border-radius: 50%;
+    background-color: white;
+    opacity: 0;
+    pointer-events: none;
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+}
+
+/* 初始化卡片装饰元素 */
+.series-card {
+    position: relative;
+}
+
+/* 为卡片添加额外效果容器 */
+.series-card .card-effects-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* 能量充能效果 */
+.series-card .energy-charge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(to top, rgba(0, 102, 204, 0.2), transparent);
+    transition: height var(--transition-speed) ease;
+}
+
+.series-card:hover .energy-charge {
+    height: 100%;
+}

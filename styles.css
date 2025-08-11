@@ -1321,4 +1321,4 @@ footer::after {
     .gallery-section h2 {
         font-size: 2rem;
     }
-}`,"rewrite":false}}}
+    max-width: 800px;
