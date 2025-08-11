@@ -163,22 +163,31 @@ header {
 
 .nav-links {
     display: flex;
+    justify-content: space-around;
+    width: 70%;
     list-style: none;
 }
 
 .nav-links li {
-    margin-left: 2rem;
+    margin: 0;
+    list-style: none;
 }
 
 .nav-links a {
     color: var(--gundam-white);
     text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 500;
-    transition: var(--transition);
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: 1rem;
     position: relative;
-    padding: 5px 10px;
+    padding: 0.5rem 0.8rem;
     border-radius: 5px;
+    display: inline-block;
+    min-width: 48px;
+    min-height: 48px;
+    line-height: 1.5;
+    text-align: center;
+    transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
@@ -520,7 +529,43 @@ window.addEventListener('scroll', function() {
 }
 
 .hero-content {
-    max-width: 800px;
+    /* 优化极小屏幕上的高达编年史显示 */
+    .timeline-year {
+        font-size: 1rem;
+        padding: 0.3rem 0.8rem;
+    }
+
+    .timeline-content {
+        padding: 0.8rem;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.9rem;
+    }
+
+    /* 优化按钮在极小屏幕上的显示 */
+    .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* 时间线容器样式 */
+    .timeline {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    /* 修复极小屏幕下的容器宽度 */
+    @media screen and (max-width: 480px) {
+        .container {
+            max-width: 100%;
+            padding: 0 10px;
+        }
+    }
     padding: 2rem;
     opacity: 0;
     animation: fadeIn 1.5s ease forwards 0.5s;
@@ -637,7 +682,7 @@ window.addEventListener('scroll', function() {
 .hero-content p {
     font-size: 1.5rem;
     margin-bottom: 2rem;
-    max-width: 800px;
+    /* 修复语法错误 */
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
@@ -1482,17 +1527,68 @@ footer::after {
 @media screen and (max-width: 768px) {
     .upload-container {
         padding: 1.5rem;
+        max-width: 90%;
+        margin: 0 auto;
     }
 }
 
 @media screen and (max-width: 480px) {
     .upload-section h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+    }
+
+    .upload-container {
+        padding: 1rem;
     }
 }
 
 /* 响应式设计 */
+/* 优化触摸目标大小 */
+.btn, .nav-links a, .gallery-item, .series-card, .mobile-suit-card, .character-card {
+    min-width: 48px;
+    min-height: 48px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+/* 增强触摸反馈 */
+.btn:active, .nav-links a:active, .gallery-item:active, .series-card:active, .mobile-suit-card:active, .character-card:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+}
+
 @media screen and (max-width: 768px) {
+    /* 优化小屏幕上的英雄区域 */
+    .hero-content {
+        padding: 2rem 1rem;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+        max-width: 90%;
+        margin: 0 auto 1.5rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    /* 优化导航菜单 */
+    .nav-links {
+        width: 85%;
+    }
+
+    .nav-links li {
+        margin: 1rem 0;
+    }
     .detail-grid {
         grid-template-columns: 1fr;
     }
@@ -1573,6 +1669,178 @@ footer::after {
     .character-grid,
     .gallery-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    /* 高达编年史部分样式 */
+.chronicle-section {
+    padding: 3rem 0;
+    background-color: rgba(10, 10, 20, 0.8);
+    position: relative;
+}
+
+.chronicle-section .container {
+    max-width: 100%;
+    padding: 0 15px;
+}
+
+/* 优化高达编年史时间线在小屏幕上的显示 */
+    .timeline-container {
+        padding: 1rem 0.5rem;
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .timeline {
+        width: 100%;
+        overflow-x: hidden;
+        overflow-y: visible;
+        position: relative;
+    }
+
+    /* 时间线垂直线 */
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 15px;
+        width: 2px;
+        background-color: var(--gundam-red);
+        z-index: 1;
+    }
+
+    .timeline-item {
+        flex-direction: column;
+        margin-bottom: 2rem;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 0.5rem 0 1.5rem;
+        position: relative;
+    }
+
+    /* 时间点样式 */
+    .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: 7px;
+        top: 0.8rem;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background-color: var(--gundam-red);
+        z-index: 2;
+    }
+
+    .timeline-year {
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 1rem;
+        font-size: 1.2rem;
+        width: auto;
+        max-width: 100%;
+        box-sizing: border-box;
+        white-space: normal;
+        word-break: break-word;
+        overflow: visible;
+        display: inline-block;
+        background-color: rgba(255, 62, 0, 0.2);
+        border-left: 3px solid var(--gundam-red);
+        color: var(--gundam-white);
+    }
+
+    .timeline-content {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+        overflow: visible;
+        background-color: rgba(25, 25, 40, 0.85);
+        border-radius: 5px;
+        border: 1px solid rgba(255, 62, 0, 0.3);
+        color: var(--gundam-white);
+    }
+
+    .timeline-content h3 {
+        color: var(--gundam-yellow);
+        margin-top: 0;
+    }
+
+    @media (max-width: 768px) {
+        .timeline-year {
+            font-size: 1.1rem;
+        }
+        .timeline::before {
+            left: 10px;
+        }
+        .timeline-item::before {
+            left: 3px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .timeline-container {
+            padding: 0.5rem 0.25rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .timeline-item {
+            padding: 0 0.25rem 0 1.25rem;
+            margin-bottom: 1.5rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .timeline-year {
+            font-size: 0.95rem;
+            padding: 0.3rem 0.6rem;
+            margin-bottom: 0.3rem;
+            width: auto;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        .timeline-content {
+            padding: 0.75rem;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: rgba(25, 25, 40, 0.85);
+            border-radius: 5px;
+            border: 1px solid rgba(255, 62, 0, 0.3);
+        }
+        .timeline-content h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--gundam-yellow);
+        }
+        .timeline-content p {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            color: var(--gundam-white);
+        }
+        .timeline::before {
+            left: 8px;
+            width: 1px;
+        }
+        .timeline-item::before {
+            left: 1px;
+            width: 14px;
+            height: 14px;
+        }
+    }
+
+    .timeline-content {
+        width: 100%;
+        padding: 1rem;
+        box-sizing: border-box;
+        overflow: visible;
+        background-color: rgba(25, 25, 40, 0.5);
+        border-radius: 5px;
+        color: var(--gundam-white);
+    }
+
+    /* 优化卡片在小屏幕上的显示 */
+    .series-card, .mobile-suit-card, .character-card {
+        padding: 1rem;
+        margin: 0 auto;
+        max-width: 100%;
     }
 }
 
