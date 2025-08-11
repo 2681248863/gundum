@@ -105,6 +105,8 @@
     transform: translateY(-50%) rotate(-45deg) scaleX(0);
     transform-origin: left;
     transition: transform var(--transition-speed) ease 0.2s;
+    pointer-events: none; /* 确保对角线不阻挡鼠标事件 */
+    z-index: 1; /* 确保对角线在线条下方 */
 }
 
 /* 鼠标悬停效果 - 激活装甲线条 */
@@ -203,6 +205,7 @@
     height: 100%;
     pointer-events: none;
     overflow: hidden;
+    z-index: 1; /* 确保效果容器在内容下方 */
 }
 
 /* 能量充能效果 */
@@ -251,6 +254,7 @@ h2 {
     width: 3px;
     background: linear-gradient(to bottom, var(--gundam-armor-red), var(--gundam-armor-blue));
     transform: translateX(-50%);
+    z-index: 1; /* 确保时间线线条在内容下方 */
 }
 
 .timeline-item {
@@ -297,6 +301,7 @@ h2 {
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
+    color: white; /* 设置卡片文字为白色，提高对比度 */
 }
 
 .timeline-content:hover {
