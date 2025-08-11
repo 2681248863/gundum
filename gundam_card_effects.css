@@ -295,9 +295,44 @@ h2 {
 }
 
 .timeline-content {
-    padding: 20px;
-    background-color: rgba(25, 25, 40, 0.7);
+    padding: 25px;
+    background-color: rgba(25, 25, 40, 0.85);
     border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    margin-left: 30px;
+    position: relative;
+    z-index: 20;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.timeline-content h3 {
+    color: #ff3e00;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    text-shadow: 0 0 5px rgba(255, 62, 0, 0.5);
+}
+
+.timeline-content p {
+    color: #f0f0f0;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.chronicle-intro {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+    color: #e0e0e0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 15px;
+    background-color: rgba(25, 25, 40, 0.6);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+    position: relative;
+    z-index: 20; /* 确保内容显示在年份标签上方 */
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
