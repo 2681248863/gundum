@@ -2,13 +2,31 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <link rel="preload" href="freedom1.jpg" as="image">
+    <link rel="preload" href="shunbian.jpg" as="image">
+    <link rel="preload" href="unicorn.jpg" as="image">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>刹那的高达模型</title>
+    <meta name="description" content="刹那的高达模型收藏展示，包含自由高达、瞬变高达、独角兽高达等精美模型作品">
+    <meta name="keywords" content="高达模型,Gundam,自由高达,瞬变高达,独角兽高达,模型收藏,机动战士">
+    <meta name="author" content="刹那">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="刹那的高达模型">
+    <meta property="og:description" content="高达模型收藏展示，包含多款精美作品">
+    <meta property="og:image" content="freedom1.jpg">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <title>刹那的高达模型 | 精美高达模型收藏展示</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="gundam_card_effects.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="scroll-animation.css">
+    <link rel="stylesheet" href="loading-bar.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="gundam_card_scripts.js"></script>
+
 </head>
 <body>
     <!-- 高达主题背景动画 -->
@@ -69,17 +87,17 @@
             <h2>机动战士出击：高达</h2>
             <div class="series-grid">
             <div class="series-card">
-                <img src="model/IMG_3361.JPG" alt="自由高达模型">
+                <img src="model picture/IMG_3361.JPG" alt="自由高达模型" loading="lazy">
                 <h3>自由高达</h3>
                 <p>万代HGCE系列，1/144比例，耗时3天完成，进行了渗线和贴纸美化。</p>
             </div>
             <div class="series-card">
-                <img src="model/IMG_3363.JPG" alt="瞬变高达模型">
+                <img src="model picture/IMG_3363.JPG" alt="瞬变高达模型" loading="lazy">
                 <h3>瞬变高达</h3>
                 <p>万代HG系列，1/144比例，耗时1天完成，重点修饰了武器细节。</p>
             </div>
             <div class="series-card">
-                <img src="model/IMG_3364.JPG" alt="完美独角兽高达模型">
+                <img src="model picture/IMG_3364.JPG" alt="完美独角兽高达模型" loading="lazy">
                 <h3>完美独角兽高达</h3>
                 <p>万代HG系列，1/144比例，耗时2天完成，带有可变形结构和LED灯组。</p>
             </div>
@@ -91,8 +109,8 @@
                 <h3>自由高达</h3>
                 <div class="detail-grid">
                     <div class="detail-image">
-                        <img src="freedom1.jpg" alt="自由高达">
-                        <img src="freedom2.png" alt="自由高达细节">
+                        <img src="freedom1.jpg" alt="自由高达" loading="lazy">
+                        <img src="freedom2.png" alt="自由高达细节" loading="lazy">
                     </div>
                     <div class="detail-text">
                         <p>自由高达（Freedom Gundam）是《机动战士高达SEED》的核心主角机体，由主人公基拉·大和所驾驶。该机采用核动力驱动系统，搭载了两门光束步枪、磁轨炮及光束军刀等多种先进武装，具备全方位作战能力。</p>
@@ -106,8 +124,8 @@
                 <h3>瞬变高达</h3>
                 <div class="detail-grid">
                     <div class="detail-image">
-                        <img src="shunbian.jpg" alt="瞬变高达">
-                        <img src="shunbian2.jpg" alt="瞬变高达细节">
+                        <img src="shunbian.jpg" alt="瞬变高达" loading="lazy">
+                        <img src="shunbian2.jpg" alt="瞬变高达细节" loading="lazy">
                     </div>
                     <div class="detail-text">
                         <p>瞬变高达（Transient Gundam）是《机动战士高达Build Divers》中的特色机体，以独特的设计语言和卓越的机动性闻名。其核心亮点在于搭载了可变式背包系统，可根据战场态势灵活切换不同装备配置。</p>
@@ -121,8 +139,8 @@
                 <h3>完美独角兽高达</h3>
                 <div class="detail-grid">
                     <div class="detail-image">
-                        <img src="unicorn.jpg" alt="完美独角兽高达">
-                        <img src="unicorn2.jpeg" alt="完美独角兽高达细节">
+                        <img src="unicorn.jpg" alt="完美独角兽高达" loading="lazy">
+                        <img src="unicorn2.jpeg" alt="完美独角兽高达细节" loading="lazy">
                     </div>
                     <div class="detail-text">
                         <p>完美独角兽高达（Perfect Unicorn Gundam）是《机动战士高达UC》的核心机体，以标志性的NT-D系统和全武装配置著称。其最大特色在于能够在独角兽模式与毁灭模式之间实现形态转换，展现截然不同的战斗风格与性能特性。</p>
@@ -295,12 +313,12 @@
         <div class="container">
             <h2>MS详细数据</h2>
             <div class="gallery-grid">
-                <img src="model/IMG_3367.HEIC" alt="高达模型图片1">
-                <img src="model/IMG_3368.HEIC" alt="高达模型图片2">
-                <img src="model/IMG_3369.HEIC" alt="高达模型图片3">
-                <img src="model/IMG_3372.JPG" alt="高达模型图片4">
-                <img src="model/IMG_3373.JPG" alt="高达模型图片5">
-                <img src="model/IMG_3374.JPG" alt="高达模型图片6">
+                <img src="model picture/IMG_3367.JPG" alt="高达模型图片1" loading="lazy">
+                <img src="model picture/IMG_3368.JPG" alt="高达模型图片2" loading="lazy">
+                <img src="model picture/IMG_3369.JPG" alt="高达模型图片3" loading="lazy">
+                <img src="model picture/IMG_3372.JPG" alt="高达模型图片4" loading="lazy">
+                <img src="model picture/IMG_3365.JPG" alt="高达模型图片5" loading="lazy">
+                <img src="model picture/IMG_3366.JPG" alt="高达模型图片6" loading="lazy">
             </div>
         </div>
     </section>
@@ -335,7 +353,25 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="performance.js"></script>
+    <script src="loading-bar.js"></script>
+    <script src="scroll-animation.js"></script>
+    <link rel="stylesheet" href="loading-bar.css">
     <script>
+        // 注册服务工作者
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('ServiceWorker 注册成功: ', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('ServiceWorker 注册失败: ', err);
+                    });
+            });
+        }
+        
+        // 控制进场动画
         // 控制进场动画
         window.addEventListener('load', function() {
             console.log('页面完全加载完成，开始初始化动画');
@@ -361,12 +397,12 @@
 
             console.log('动画区域样式设置完成');
 
-            // 自动隐藏动画 - 时间设置为20秒
-            console.log('[' + new Date().toLocaleTimeString() + '] 自动隐藏动画时间设置为20秒');
+            // 自动隐藏动画 - 时间设置为5秒
+            console.log('[' + new Date().toLocaleTimeString() + '] 自动隐藏动画时间设置为5秒');
             const autoHideTimer = setTimeout(function() {
-                console.log('[' + new Date().toLocaleTimeString() + '] 20秒后自动隐藏触发');
+                console.log('[' + new Date().toLocaleTimeString() + '] 5秒后自动隐藏触发');
                 hideAnimation();
-            }, 5000); // 20秒后隐藏动画
+            }, 5000); // 5秒后隐藏动画
 
             // 隐藏动画函数 - 添加平滑过渡效果
             function hideAnimation() {

@@ -110,14 +110,22 @@
 }
 
 /* 鼠标悬停效果 - 激活装甲线条 */
+.series-card {
+    will-change: transform, box-shadow;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
 .series-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    transform: translateY(-8px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 62, 0, 0.3);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.5s ease;
 }
 
 .series-card:hover::before,
 .series-card:hover::after {
     transform: scaleX(1);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .series-card:hover .armor-line-top-left,
@@ -126,10 +134,17 @@
 .series-card:hover .armor-line-bottom-right,
 .series-card:hover .diagonal-line {
     transform: scaleY(1);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .series-card:hover .diagonal-line {
     transform: translateY(-50%) rotate(-45deg) scaleX(1);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.series-card:hover .energy-charge {
+    height: 100%;
+    transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* 卡片图片激活效果 */

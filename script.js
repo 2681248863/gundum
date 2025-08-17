@@ -13,16 +13,25 @@ document.addEventListener('DOMContentLoaded', function() {
         silhouette.classList.add('gundam-silhouette');
         background.appendChild(silhouette);
 
-        // 创建多个能量光束
+        // 使用requestAnimationFrame优化性能
+        let lastTime = 0;
         const beamCount = 8; // 光束数量
-        for (let i = 0; i < beamCount; i++) {
-            setTimeout(() => {
+        let beamsCreated = 0;
+        
+        function createBeam(timestamp) {
+            if (!lastTime) lastTime = timestamp;
+            const deltaTime = timestamp - lastTime;
+            
+            if (deltaTime >= 300 && beamsCreated < beamCount) {
                 const beam = document.createElement('div');
                 beam.classList.add('energy-beam');
                 
-                // 随机位置
-                const leftPos = Math.random() * 100;
-                beam.style.left = `${leftPos}%`;
+                // 使用transform代替left/top
+                const xPos = Math.random() * 100;
+                beam.style.transform = `translateX(${xPos}%)`;
+                
+                // 使用will-change优化动画性能
+                beam.style.willChange = 'transform, opacity';
                 
                 // 随机动画延迟和持续时间
                 const delay = Math.random() * 5;
@@ -36,8 +45,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 beam.style.background = `linear-gradient(to bottom, transparent 0%, ${randomColor} 50%, transparent 100%)`;
                 
                 background.appendChild(beam);
-            }, i * 500); // 错开创建时间
+                
+                beamsCreated++;
+                lastTime = timestamp;
+            }
+            
+            if (beamsCreated < beamCount) {
+                requestAnimationFrame(createBeam);
+            }
         }
+        
+        requestAnimationFrame(createBeam);
     }
     // 移动端导航栏切换
     const burger = document.querySelector('.burger');

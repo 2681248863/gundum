@@ -1,0 +1,32 @@
+/* 页面加载进度条 */
+#loading-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: transparent;
+    z-index: 9999;
+}
+
+#loading-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #ff3e00, #0066cc);
+    transition: width 0.3s ease;
+}
+
+#loading-bar.loading-start::before {
+    width: 30%;
+    transition: width 1s ease;
+}
+
+#loading-bar.loading-complete::before {
+    width: 100%;
+    opacity: 0;
+    transition: width 0.5s ease, opacity 0.5s ease 0.5s;
+}
